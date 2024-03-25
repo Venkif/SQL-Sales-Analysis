@@ -1,6 +1,3 @@
---DROP TABLE [dbo].[sales_data_sample]
-
-
 --Inspecting Data
 SELECT * FROM dbo.sales_data_sample
 
@@ -45,3 +42,17 @@ FROM [dbo].[sales_data_sample]
 WHERE YEAR_ID = 2003 AND MONTH_ID = 11--change year to see the rest
 GROUP BY MONTH_ID, PRODUCTLINE
 ORDER BY 3 desc
+
+--What city has the highest number of sales in a specific country
+select city, sum (sales) Revenue
+from [dbo].[sales_data_sample]
+where country = 'UK'
+group by city
+order by 2 desc
+
+---What is the best product in United States?
+select country, YEAR_ID, PRODUCTLINE, sum(sales) Revenue
+from [dbo].[sales_data_sample]
+where country = 'USA'
+group by  country, YEAR_ID, PRODUCTLINE
+order by 4 desc
